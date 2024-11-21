@@ -25,8 +25,8 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
         with:
           registry-type: public
-      # - name: Set up QEMU
-      #   uses: docker/setup-qemu-action@v2
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
         with:
@@ -47,7 +47,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           file: Dockerfile
-          tags: ${{ steps.login-ecr.outputs.registry }}/apache/kvrocks-controller:${{ steps.calver.outputs.release }},${{ steps.login-ecr.outputs.registry }}/apache/kvrocks-controller:latest
+          tags: ${{ steps.login-ecr.outputs.registry }}/onebeat/apache/kvrocks-controller:${{ steps.calver.outputs.release }},${{ steps.login-ecr.outputs.registry }}/onebeat/apache/kvrocks-controller:latest
           cache-from: type=s3,region=us-east-1,bucket=onebeat-github-action-docker-cache,prefix=kvrocks-controller-
           cache-to: type=s3,region=us-east-1,bucket=onebeat-github-action-docker-cache,prefix=kvrocks-controller-
 
